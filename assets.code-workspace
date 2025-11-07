@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "assets",
+			"path": "../IntentLink/intentlink-backend/assets"
+		},
+		{
+			"name": "intentlink-backend",
+			"path": "."
+		}
+	],
+	"settings": {}
+}
