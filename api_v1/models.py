@@ -15,6 +15,7 @@ class Intent(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user_wallet = models.CharField(max_length=42)
+    chain_id = models.IntegerField(default=1043)
     input_text = models.TextField(blank=True, null=True)
     intent_json = models.JSONField()
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.PARSED)

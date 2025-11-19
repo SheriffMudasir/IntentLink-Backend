@@ -1,0 +1,674 @@
+
+[block:30519071 txIndex:-]from: 0x3a3...11d42to: IntentWallet.(constructor)value: 0 weidata: 0x610...11d42logs: 1hash: 0x412...5aa7f
+status	0x1 Transaction mined and execution succeed
+transaction hash	0x28a4078b0d9c0ccf67ef23d3a8ed7762263e913b41581962cad91c9b60bf65da
+block hash	0x4120ade4906933adbe36f58bb2eec5ff6fa798595f95ba0ae6f817d4de45aa7f
+block number	30519071
+contract address	0x718a09981d305c2293d0c85e9d957ad25cb2a1c7
+from	0x3a392a920c06125c94c0c0c2db0aba70c6e11d42
+to	IntentWallet.(constructor)
+gas	3000000 gas
+transaction cost	2021767 gas 
+input	0x610...11d42
+decoded input	{
+	"address initialOwner": "0x3A392A920C06125C94C0C0C2Db0aBa70C6e11D42"
+}
+decoded output	 - 
+logs	[
+	{
+		"from": "0x718a09981d305c2293d0c85e9d957ad25cb2a1c7",
+		"topic": "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",
+		"event": "OwnershipTransferred",
+		"args": {
+			"0": "0x0000000000000000000000000000000000000000",
+			"1": "0x3A392A920C06125C94C0C0C2Db0aBa70C6e11D42",
+			"previousOwner": "0x0000000000000000000000000000000000000000",
+			"newOwner": "0x3A392A920C06125C94C0C0C2Db0aBa70C6e11D42"
+		}
+	}
+]
+raw logs	[
+  {
+    "address": "0x718a09981d305c2293d0c85e9d957ad25cb2a1c7",
+    "topics": [
+      "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",
+      "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "0x0000000000000000000000003a392a920c06125c94c0c0c2db0aba70c6e11d42"
+    ],
+    "data": "0x",
+    "blockNumber": "0x1d1af1f",
+    "transactionHash": "0x28a4078b0d9c0ccf67ef23d3a8ed7762263e913b41581962cad91c9b60bf65da",
+    "transactionIndex": "0x0",
+    "blockHash": "0x4120ade4906933adbe36f58bb2eec5ff6fa798595f95ba0ae6f817d4de45aa7f",
+    "logIndex": "0x0",
+    "removed": false
+  }
+]
+>
+
+IntentWallet wallet = 0x718A09981d305c2293d0C85e9d957Ad25CB2a1C7
+
+IntentWallet at 0x718...2a1C7 (blockchain)
+MockDEX at 0xbC47d9625e7c102C6E9C08D29BbD3A76514eCB56 (blockchain)
+MockStakingFarm at 0x1b227DF9c8D34CaB880774737FBf426E66Ba98Ed (blockchain)
+MockLending at 0xa23bDd28F9221F275897D8A26A8eb97A341cd257 (blockchain)
+
+
+[block:30578195 txIndex:-]from: 0x3a3...11d42to: IntentWallet.setWhitelistStatus(address,bool) 0x718...2a1c7value: 0 weidata: 0x0c4...00001logs: 1hash: 0x3c6...c3de1
+status	0x1 Transaction mined and execution succeed
+transaction hash	0xfd9bc64599f2a895e9b6106792bc5cb28896ee90d2bf50c4681932f3b9c5f3c4
+block hash	0x3c6db5160d5b1b85cc721e91cc553bd0ba67c1de91bc819b1e59acc9ab5c3de1
+block number	30578195
+from	0x3a392a920c06125c94c0c0c2db0aba70c6e11d42
+to	IntentWallet.setWhitelistStatus(address,bool) 0x718a09981d305c2293d0c85e9d957ad25cb2a1c7
+gas	3000000 gas
+transaction cost	48309 gas 
+input	0x0c4...00001
+decoded input	{
+	"address target": "0x1b227DF9c8D34CaB880774737FBf426E66Ba98Ed",
+	"bool isAllowed": true
+}
+decoded output	 - 
+logs	[
+	{
+		"from": "0x718a09981d305c2293d0c85e9d957ad25cb2a1c7",
+		"topic": "0x52eec1a0372bcc0f149dd096fc04f013047c878bd949d11adecf9b39bc0c71dc",
+		"event": "TargetWhitelistUpdated",
+		"args": {
+			"0": "0x1b227DF9c8D34CaB880774737FBf426E66Ba98Ed",
+			"1": true,
+			"target": "0x1b227DF9c8D34CaB880774737FBf426E66Ba98Ed",
+			"isAllowed": true
+		}
+	}
+]
+raw logs	[
+  {
+    "address": "0x718a09981d305c2293d0c85e9d957ad25cb2a1c7",
+    "topics": [
+      "0x52eec1a0372bcc0f149dd096fc04f013047c878bd949d11adecf9b39bc0c71dc",
+      "0x0000000000000000000000001b227df9c8d34cab880774737fbf426e66ba98ed"
+    ],
+    "data": "0x0000000000000000000000000000000000000000000000000000000000000001",
+    "blockNumber": "0x1d29620",
+    "transactionHash": "0xfd9bc64599f2a895e9b6106792bc5cb28896ee90d2bf50c4681932f3b9c5f3c4",
+    "transactionIndex": "0x0",
+    "blockHash": "0xcc054dee1e2f3bc2426d0bfdece7cf56e110094d97423fce082b0823cda4fdff",
+    "logIndex": "0x0",
+    "removed": false
+  }
+]
+transact to IntentWallet.setWhitelistStatus pending ... 
+[block:30578897 txIndex:1]from: 0x3a3...11d42to: IntentWallet.setWhitelistStatus(address,bool) 0x718...2a1c7value: 0 weidata: 0x0c4...00001logs: 1hash: 0x7a6...61ed9
+status	0x1 Transaction mined and execution succeed
+transaction hash	0x17ffd4c198db3000d4a0f5610c52d14c49bf9f5defad47a5926bbac0c1fecfe7
+block hash	0x7a6f38a350437169cf93f9ae63a052fb54e33e2d76839caa43aa1302b0f61ed9
+block number	30578897
+from	0x3a392a920c06125c94c0c0c2db0aba70c6e11d42
+to	IntentWallet.setWhitelistStatus(address,bool) 0x718a09981d305c2293d0c85e9d957ad25cb2a1c7
+gas	3000000 gas
+transaction cost	48309 gas 
+input	0x0c4...00001
+decoded input	{
+	"address target": "0xa23bDd28F9221F275897D8A26A8eb97A341cd257",
+	"bool isAllowed": true
+}
+decoded output	 - 
+logs	[
+	{
+		"from": "0x718a09981d305c2293d0c85e9d957ad25cb2a1c7",
+		"topic": "0x52eec1a0372bcc0f149dd096fc04f013047c878bd949d11adecf9b39bc0c71dc",
+		"event": "TargetWhitelistUpdated",
+		"args": {
+			"0": "0xa23bDd28F9221F275897D8A26A8eb97A341cd257",
+			"1": true,
+			"target": "0xa23bDd28F9221F275897D8A26A8eb97A341cd257",
+			"isAllowed": true
+		}
+	}
+]
+raw logs	[
+  {
+    "address": "0x718a09981d305c2293d0c85e9d957ad25cb2a1c7",
+    "topics": [
+      "0x52eec1a0372bcc0f149dd096fc04f013047c878bd949d11adecf9b39bc0c71dc",
+      "0x000000000000000000000000a23bdd28f9221f275897d8a26a8eb97a341cd257"
+    ],
+    "data": "0x0000000000000000000000000000000000000000000000000000000000000001",
+    "blockNumber": "0x1d298d1",
+    "transactionHash": "0x17ffd4c198db3000d4a0f5610c52d14c49bf9f5defad47a5926bbac0c1fecfe7",
+    "transactionIndex": "0x1",
+    "blockHash": "0x7a6f38a350437169cf93f9ae63a052fb54e33e2d76839caa43aa1302b0f61ed9",
+    "logIndex": "0x0",
+    "removed": false
+  }
+]
+transact to IntentWallet.setWhitelistStatus pending ... 
+[block:30579343 txIndex:-]from: 0x3a3...11d42to: IntentWallet.setWhitelistStatus(address,bool) 0x718...2a1c7value: 0 weidata: 0x0c4...00001logs: 1hash: 0x27a...097dd
+status	0x1 Transaction mined and execution succeed
+transaction hash	0x7d62a9a72e7038c8f50566e201e032a03f2c1c3cc562994bc1aa130501ff40b2
+block hash	0x27aef61edb0d491ea67199f6eb8d0dbe9fe02d510e540202151feb97617097dd
+block number	30579343
+from	0x3a392a920c06125c94c0c0c2db0aba70c6e11d42
+to	IntentWallet.setWhitelistStatus(address,bool) 0x718a09981d305c2293d0c85e9d957ad25cb2a1c7
+gas	3000000 gas
+transaction cost	28409 gas 
+input	0x0c4...00001
+decoded input	{
+	"address target": "0xbC47d9625e7c102C6E9C08D29BbD3A76514eCB56",
+	"bool isAllowed": true
+}
+decoded output	 - 
+logs	[
+	{
+		"from": "0x718a09981d305c2293d0c85e9d957ad25cb2a1c7",
+		"topic": "0x52eec1a0372bcc0f149dd096fc04f013047c878bd949d11adecf9b39bc0c71dc",
+		"event": "TargetWhitelistUpdated",
+		"args": {
+			"0": "0xbC47d9625e7c102C6E9C08D29BbD3A76514eCB56",
+			"1": true,
+			"target": "0xbC47d9625e7c102C6E9C08D29BbD3A76514eCB56",
+			"isAllowed": true
+		}
+	}
+]
+raw logs	[
+  {
+    "address": "0x718a09981d305c2293d0c85e9d957ad25cb2a1c7",
+    "topics": [
+      "0x52eec1a0372bcc0f149dd096fc04f013047c878bd949d11adecf9b39bc0c71dc",
+      "0x000000000000000000000000bc47d9625e7c102c6e9c08d29bbd3a76514ecb56"
+    ],
+    "data": "0x0000000000000000000000000000000000000000000000000000000000000001",
+    "blockNumber": "0x1d29a8f",
+    "transactionHash": "0x7d62a9a72e7038c8f50566e201e032a03f2c1c3cc562994bc1aa130501ff40b2",
+    "transactionIndex": "0x0",
+    "blockHash": "0x27aef61edb0d491ea67199f6eb8d0dbe9fe02d510e540202151feb97617097dd",
+    "logIndex": "0x0",
+    "removed": false
+  }
+]
+
+
+
+
+
+
+
+ABI = [
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "initialOwner",
+				"type": "address"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [],
+		"name": "ECDSAInvalidSignature",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "length",
+				"type": "uint256"
+			}
+		],
+		"name": "ECDSAInvalidSignatureLength",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "s",
+				"type": "bytes32"
+			}
+		],
+		"name": "ECDSAInvalidSignatureS",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "EnforcedPause",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"components": [
+					{
+						"internalType": "bytes32",
+						"name": "planId",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "planHash",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint256",
+						"name": "nonce",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "expiry",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct IntentWallet.Plan",
+				"name": "plan",
+				"type": "tuple"
+			},
+			{
+				"internalType": "address[]",
+				"name": "targets",
+				"type": "address[]"
+			},
+			{
+				"internalType": "bytes[]",
+				"name": "calldatas",
+				"type": "bytes[]"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "cidHash",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bytes",
+				"name": "signature",
+				"type": "bytes"
+			}
+		],
+		"name": "executeBatch",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "ExpectedPause",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "InvalidShortString",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			}
+		],
+		"name": "OwnableInvalidOwner",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "OwnableUnauthorizedAccount",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "ReentrancyGuardReentrantCall",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "str",
+				"type": "string"
+			}
+		],
+		"name": "StringTooLong",
+		"type": "error"
+	},
+	{
+		"anonymous": false,
+		"inputs": [],
+		"name": "EIP712DomainChanged",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "bytes32",
+				"name": "planId",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"internalType": "bytes32",
+				"name": "cidHash",
+				"type": "bytes32"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "relayer",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "nonce",
+				"type": "uint256"
+			}
+		],
+		"name": "IntentExecuted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "previousOwner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "OwnershipTransferred",
+		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "pause",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "Paused",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "relayer",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "isAllowed",
+				"type": "bool"
+			}
+		],
+		"name": "RelayerAuthorizationUpdated",
+		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "renounceOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "relayer",
+				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "isAuthorized",
+				"type": "bool"
+			}
+		],
+		"name": "setRelayerAuthorization",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "target",
+				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "isAllowed",
+				"type": "bool"
+			}
+		],
+		"name": "setWhitelistStatus",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "target",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "isAllowed",
+				"type": "bool"
+			}
+		],
+		"name": "TargetWhitelistUpdated",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "unpause",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "Unpaused",
+		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "eip712Domain",
+		"outputs": [
+			{
+				"internalType": "bytes1",
+				"name": "fields",
+				"type": "bytes1"
+			},
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "version",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "chainId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "verifyingContract",
+				"type": "address"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "salt",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "extensions",
+				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "isRelayerAuthorized",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "isTargetWhitelisted",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "nonces",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "paused",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
+
+
