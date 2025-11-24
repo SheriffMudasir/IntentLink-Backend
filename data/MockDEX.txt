@@ -1,0 +1,70 @@
+
+[block:30533311 txIndex:-]from: 0x3a3...11d42to: MockDEX.(constructor)value: 0 weidata: 0x608...a0033logs: 0hash: 0x876...92b36
+status	0x1 Transaction mined and execution succeed
+transaction hash	0x9bd10fb43140caa450492d5e3680e336ad9dc5f552820b2c36f18512212117f8
+block hash	0x876d5cd0db53af626a45bfce9298e66e6ede86f92ebd59ea098fcc841e692b36
+block number	30533311
+contract address	0xbc47d9625e7c102c6e9c08d29bbd3a76514ecb56
+from	0x3a392a920c06125c94c0c0c2db0aba70c6e11d42
+to	MockDEX.(constructor)
+gas	3000000 gas
+transaction cost	164229 gas 
+input	0x608...a0033
+decoded input	{}
+decoded output	 - 
+logs	[]
+raw logs	[]
+
+
+MockDEX dex = 0xbC47d9625e7c102C6E9C08D29BbD3A76514eCB56
+
+ABI = [
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "tokenIn",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "tokenOut",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amountIn",
+				"type": "uint256"
+			}
+		],
+		"name": "swap",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "tokenIn",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "tokenOut",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amountIn",
+				"type": "uint256"
+			}
+		],
+		"name": "Swapped",
+		"type": "event"
+	}
+]
