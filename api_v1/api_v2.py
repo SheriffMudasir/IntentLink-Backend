@@ -294,7 +294,7 @@ def get_security_report(request, chain_id: int, address: str):
     
     This makes the user FEEL protected by our AI security layer.
     """
-    logger.info(f"🔒 Security report request: chain={chain_id}, address={address}")
+    logger.info(f"Security report request: chain={chain_id}, address={address}")
     
     try:
         # Get security check from GoPlus

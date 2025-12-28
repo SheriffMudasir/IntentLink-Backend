@@ -327,7 +327,7 @@ class PortfolioService:
             current_apy = Decimal(result[3]) / Decimal(100)  # Convert to percentage
             eth_balance = Decimal(result[4]) / Decimal(10**18)
             
-            logger.info(f"V2 getPortfolio result: USDT={wallet_balance}, Staked={staked_balance}, Rewards={pending_rewards}, APY={current_apy}%, Native={eth_balance}"))
+            logger.info(f"V2 getPortfolio result: USDT={wallet_balance}, Staked={staked_balance}, Rewards={pending_rewards}, APY={current_apy}%, Native={eth_balance}")
             
             return PortfolioV2Data(
                 wallet_balance=wallet_balance,

@@ -16,7 +16,7 @@ def test_eip712_hash_consistency():
     the hash used for verification.
     """
     print("="*70)
-    print("🧪 TESTING EIP-712 HASH CONSISTENCY")
+    print("TESTING EIP-712 HASH CONSISTENCY")
     print("="*70)
     
     chain_id = 1043
@@ -24,7 +24,7 @@ def test_eip712_hash_consistency():
     plan_hash_hex = "0xa1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2"
     nonce = 0
     
-    print(f"📋 Test Parameters:")
+    print(f"Test Parameters:")
     print(f"  Chain ID: {chain_id}")
     print(f"  Plan ID:  {plan_id_hex}")
     print(f"  Plan Hash: {plan_hash_hex}")
@@ -32,33 +32,33 @@ def test_eip712_hash_consistency():
     print()
     
     # Generate typed data (what frontend receives)
-    print("📝 Step 1: Generating typed data (simulating backend /prepare endpoint)...")
+    print("Step 1: Generating typed data (simulating backend /prepare endpoint)...")
     typed_data = signature_service.generate_typed_data(
         chain_id, plan_id_hex, plan_hash_hex, nonce
     )
     
     # Extract expiry from generated data
     expiry = typed_data['message']['expiry']
-    print(f"  ✅ Typed data generated. Expiry: {expiry}")
+    print(f"  [OK] Typed data generated. Expiry: {expiry}")
     print()
     
     # Create a test account
-    print("👤 Step 2: Creating test wallet...")
+    print("Step 2: Creating test wallet...")
     test_account = Account.create()
-    print(f"  ✅ Test wallet created: {test_account.address}")
+    print(f"  [OK] Test wallet created: {test_account.address}")
     print()
     
     # Sign it (simulating frontend)
-    print("✍️ Step 3: Signing typed data (simulating frontend ethers.js)...")
+    print("Step 3: Signing typed data (simulating frontend ethers.js)...")
     signable_message = encode_typed_data(
         full_message=typed_data
     )
     signature = test_account.sign_message(signable_message)
-    print(f"  ✅ Signature generated: {signature.signature.hex()[:66]}...")
+    print(f"  [OK] Signature generated: {signature.signature.hex()[:66]}...")
     print()
     
     # Verify it (simulating backend)
-    print("🔍 Step 4: Verifying signature (simulating backend /submit endpoint)...")
+    print("Step 4: Verifying signature (simulating backend /submit endpoint)...")
     is_valid = signature_service.verify_signature(
         chain_id=chain_id,
         plan_id_hex=plan_id_hex,
@@ -71,13 +71,13 @@ def test_eip712_hash_consistency():
     
     print("="*70)
     if is_valid:
-        print("✅ TEST PASSED: Signature verification successful!")
-        print("✅ EIP-712 hashes are consistent between frontend and backend")
+        print("[OK] TEST PASSED: Signature verification successful!")
+        print("[OK] EIP-712 hashes are consistent between frontend and backend")
         print("="*70)
         return True
     else:
-        print("❌ TEST FAILED: Signature verification failed!")
-        print("❌ EIP-712 hashes don't match between frontend and backend")
+        print("[ERROR] TEST FAILED: Signature verification failed!")
+        print("[ERROR] EIP-712 hashes don't match between frontend and backend")
         print("="*70)
         return False
 
@@ -86,7 +86,7 @@ if __name__ == "__main__":
         success = test_eip712_hash_consistency()
         sys.exit(0 if success else 1)
     except Exception as e:
-        print(f"\n❌ TEST CRASHED: {e}")
+        print(f"\n[ERROR] TEST CRASHED: {e}")
         import traceback
         traceback.print_exc()
         sys.exit(1)

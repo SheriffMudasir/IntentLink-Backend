@@ -18,19 +18,19 @@ def test_multichain_config():
     
     # Test 1: Check if NETWORK_CONFIG exists
     if not hasattr(settings, 'NETWORK_CONFIG'):
-        print("❌ FAILED: NETWORK_CONFIG not found in settings")
+        print("[ERROR] NETWORK_CONFIG not found in settings")
         return False
     
     config = settings.NETWORK_CONFIG
-    print(f"✅ NETWORK_CONFIG loaded with {len(config)} networks\n")
+    print(f"[OK] NETWORK_CONFIG loaded with {len(config)} networks\n")
     
     # Test 2: Verify both chains are configured
     chains = {1043: "BlockDAG", 80002: "Polygon Amoy"}
     for chain_id, name in chains.items():
         if chain_id not in config:
-            print(f"❌ FAILED: Chain {chain_id} ({name}) not found")
+            print(f"[ERROR] Chain {chain_id} ({name}) not found")
             return False
-        print(f"✅ Chain {chain_id} ({name}) configured")
+        print(f"[OK] Chain {chain_id} ({name}) configured")
     
     print("\n" + "-"*70)
     
@@ -57,7 +57,7 @@ def test_multichain_config():
     
     # Test 4: Verify address differences
     print("\n" + "-"*70)
-    print("\n🔍 VERIFICATION: Address Differences")
+    print("\nVERIFICATION: Address Differences")
     print("-"*40)
     
     # These should be the same
@@ -67,9 +67,9 @@ def test_multichain_config():
         bd_addr = blockdag['contracts'][contract].lower()
         am_addr = amoy['contracts'][contract].lower()
         if bd_addr == am_addr:
-            print(f"  ✅ {contract}: {blockdag['contracts'][contract]}")
+            print(f"  [OK] {contract}: {blockdag['contracts'][contract]}")
         else:
-            print(f"  ❌ {contract} mismatch!")
+            print(f"  [ERROR] {contract} mismatch!")
             print(f"     BlockDAG: {blockdag['contracts'][contract]}")
             print(f"     Amoy: {amoy['contracts'][contract]}")
             return False
@@ -81,15 +81,15 @@ def test_multichain_config():
         bd_addr = blockdag['contracts'][contract].lower()
         am_addr = amoy['contracts'][contract].lower()
         if bd_addr != am_addr:
-            print(f"  ✅ {contract}:")
+            print(f"  [OK] {contract}:")
             print(f"     BlockDAG: {blockdag['contracts'][contract]}")
             print(f"     Amoy: {amoy['contracts'][contract]}")
         else:
-            print(f"  ⚠️  {contract}: Same on both chains (unexpected)")
+            print(f"  [WARN] {contract}: Same on both chains (unexpected)")
     
     # Test 5: Verify whitelisted protocols
     print("\n" + "-"*70)
-    print("\n🔒 Whitelisted Protocols:")
+    print("\nWhitelisted Protocols:")
     print("-"*40)
     for chain_id, name in chains.items():
         print(f"\n{name} (Chain {chain_id}):")
@@ -100,7 +100,7 @@ def test_multichain_config():
                 print(f"    - {addr}")
     
     print("\n" + "="*70)
-    print("✅ ALL TESTS PASSED - Multi-chain configuration is correct!")
+    print("[OK] ALL TESTS PASSED - Multi-chain configuration is correct!")
     print("="*70 + "\n")
     
     return True
@@ -110,7 +110,7 @@ if __name__ == "__main__":
         success = test_multichain_config()
         exit(0 if success else 1)
     except Exception as e:
-        print(f"\n❌ ERROR: {str(e)}")
+        print(f"\n[ERROR] {str(e)}")
         import traceback
         traceback.print_exc()
         exit(1)

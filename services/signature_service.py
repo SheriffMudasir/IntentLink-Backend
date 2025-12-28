@@ -137,14 +137,14 @@ class SignatureService:
             else:
                 logger.error(f"[SIG] Signature invalid - address mismatch")
                 logger.error(f"[SIG] Recovered: {recovered_address}")
-                logger.error(f"[SIG] Expected: {user_address}"))
+                logger.error(f"[SIG] Expected: {user_address}")
             
             logger.info("-"*70)
             return is_match
 
         except Exception as e:
             logger.error(f"[SIG] Signature verification exception: {e}")
-            logger.error(f"[SIG] Exception type: {type(e).__name__}"))
+            logger.error(f"[SIG] Exception type: {type(e).__name__}")
             import traceback
             logger.error(f"[SIG-VERIFY] Traceback: {traceback.format_exc()}")
             logger.info("-"*70)

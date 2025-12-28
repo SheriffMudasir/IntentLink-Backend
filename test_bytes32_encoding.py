@@ -36,10 +36,10 @@ message_hex = {
 
 try:
     signable_hex = encode_typed_data(domain, message_types, message_hex)
-    print(f"✅ HEX STRING encoding SUCCESS")
+    print(f"[OK] HEX STRING encoding SUCCESS")
     print(f"   Hash: {signable_hex.body.hex()[:66]}...")
 except Exception as e:
-    print(f"❌ HEX STRING encoding FAILED: {e}")
+    print(f"[ERROR] HEX STRING encoding FAILED: {e}")
 
 print()
 
@@ -57,10 +57,10 @@ message_bytes = {
 
 try:
     signable_bytes = encode_typed_data(domain, message_types, message_bytes)
-    print(f"✅ RAW BYTES encoding SUCCESS")
+    print(f"[OK] RAW BYTES encoding SUCCESS")
     print(f"   Hash: {signable_bytes.body.hex()[:66]}...")
 except Exception as e:
-    print(f"❌ RAW BYTES encoding FAILED: {e}")
+    print(f"[ERROR] RAW BYTES encoding FAILED: {e}")
 
 print()
 print("="*70)
@@ -68,8 +68,8 @@ print("COMPARISON")
 print("="*70)
 if 'signable_hex' in locals() and 'signable_bytes' in locals():
     if signable_hex.body == signable_bytes.body:
-        print("✅ Both methods produce IDENTICAL hashes!")
+        print("[OK] Both methods produce IDENTICAL hashes!")
     else:
-        print("❌ Methods produce DIFFERENT hashes!")
+        print("[ERROR] Methods produce DIFFERENT hashes!")
         print(f"   HEX:   {signable_hex.body.hex()}")
         print(f"   BYTES: {signable_bytes.body.hex()}")

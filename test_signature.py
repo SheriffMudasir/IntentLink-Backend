@@ -26,7 +26,7 @@ def test_signature_service():
     test_contract = "0x1b227DF9c8D34CaB880774737FBf426E66Ba98Ed"
     test_amount = 1000.0
     
-    print("📋 Test Parameters:")
+    print("Test Parameters:")
     print(f"  Chain ID: {chain_id}")
     print(f"  Plan ID: {test_plan_id}")
     print(f"  Contract: {test_contract}")
@@ -37,7 +37,7 @@ def test_signature_service():
     data_to_hash = f"{test_contract}{test_amount}"
     plan_hash_hex = Web3.keccak(text=data_to_hash).hex()
     
-    print(f"\n🔐 Generated Hashes:")
+    print(f"\nGenerated Hashes:")
     print(f"  Plan ID Hash: {plan_id_hex}")
     print(f"  Plan Hash: {plan_hash_hex}")
     
@@ -53,7 +53,7 @@ def test_signature_service():
         nonce=0
     )
     
-    print("✅ Typed data generated:")
+    print("[OK] Typed data generated:")
     print(f"  Domain: {typed_data['domain']['name']} v{typed_data['domain']['version']}")
     print(f"  Chain ID: {typed_data['domain']['chainId']}")
     print(f"  Verifying Contract: {typed_data['domain']['verifyingContract']}")
@@ -94,7 +94,7 @@ def test_signature_service():
     signed_message = test_account.sign_message(signable_message)
     signature = signed_message.signature.hex()
     
-    print(f"✅ Message signed")
+    print(f"[OK] Message signed")
     print(f"  Signature: {signature[:66]}...")
     print(f"  Signature length: {len(signature)} chars")
     
@@ -114,9 +114,9 @@ def test_signature_service():
     )
     
     if is_valid:
-        print("✅ Signature VALID - User authenticated!")
+        print("[OK] Signature VALID - User authenticated!")
     else:
-        print("❌ Signature INVALID - Authentication failed!")
+        print("[ERROR] Signature INVALID - Authentication failed!")
         return False
     
     # Step 4: Test with wrong address (should fail)
@@ -136,9 +136,9 @@ def test_signature_service():
     )
     
     if not is_valid_wrong:
-        print(f"✅ Correctly rejected wrong address: {wrong_address}")
+        print(f"[OK] Correctly rejected wrong address: {wrong_address}")
     else:
-        print(f"❌ SECURITY ISSUE: Accepted wrong address!")
+        print(f"[ERROR] SECURITY ISSUE: Accepted wrong address!")
         return False
     
     # Step 5: Test multi-chain support
@@ -154,12 +154,12 @@ def test_signature_service():
         nonce=0
     )
     
-    print(f"✅ Generated typed data for chain {amoy_chain_id}")
+    print(f"[OK] Generated typed data for chain {amoy_chain_id}")
     print(f"  Domain Chain ID: {amoy_typed_data['domain']['chainId']}")
     print(f"  Same Verifying Contract: {amoy_typed_data['domain']['verifyingContract']}")
     
     # Verify the signature would be different on different chain
-    print("\n  🔍 Verifying chain-specific signatures...")
+    print("\n  Verifying chain-specific signatures...")
     print(f"     BlockDAG signature valid on Amoy? ", end="")
     
     is_valid_cross_chain = signature_service.verify_signature(
@@ -173,20 +173,20 @@ def test_signature_service():
     )
     
     if not is_valid_cross_chain:
-        print("❌ (Correct - signature is chain-specific)")
+        print("[NO] (Correct - signature is chain-specific)")
     else:
-        print("⚠️  WARNING: Signature accepted across chains!")
+        print("[WARN] WARNING: Signature accepted across chains!")
     
     print("\n" + "="*70)
-    print("✅ ALL CRYPTOGRAPHIC SECURITY TESTS PASSED")
+    print("[OK] ALL CRYPTOGRAPHIC SECURITY TESTS PASSED")
     print("="*70)
-    print("\n📌 Key Security Features Validated:")
-    print("  ✅ EIP-712 structured data signing")
-    print("  ✅ Signature verification with address recovery")
-    print("  ✅ Protection against unauthorized access")
-    print("  ✅ Chain-specific signature binding")
-    print("  ✅ Deterministic hash generation")
-    print("\n🎉 Phase 4 Implementation Complete!")
+    print("\nKey Security Features Validated:")
+    print("  [OK] EIP-712 structured data signing")
+    print("  [OK] Signature verification with address recovery")
+    print("  [OK] Protection against unauthorized access")
+    print("  [OK] Chain-specific signature binding")
+    print("  [OK] Deterministic hash generation")
+    print("\nPhase 4 Implementation Complete!")
     print("   The backend now requires cryptographic proof of user consent.")
     print("="*70 + "\n")
     
@@ -197,7 +197,7 @@ if __name__ == "__main__":
         success = test_signature_service()
         exit(0 if success else 1)
     except Exception as e:
-        print(f"\n❌ ERROR: {str(e)}")
+        print(f"\n[ERROR] {str(e)}")
         import traceback
         traceback.print_exc()
         exit(1)
