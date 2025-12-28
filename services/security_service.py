@@ -22,12 +22,14 @@ class SecurityReport(Schema):
 
 class SecurityService:
     """Security validation service using GoPlus API."""
-    GOPLUS_API_BASE = "https://api.gopluslabs.io/api/v1"
     
-    def __init__(self, api_key: str, api_secret: str, rpc_url: str, redis_url: str):
+    def __init__(self, api_key: str, api_secret: str, network_config: dict, redis_url: str):
         self.api_key = api_key
         self.api_secret = api_secret
+        self.network_config = network_config
         self.token_cache_key = "goplus:access_token"
+        # Get GOPLUS_API_BASE from settings (configured via .env)
+        self.goplus_api_base = getattr(settings, 'GOPLUS_API_BASE', 'https://api.gopluslabs.io/api/v1')
         
         try:
             self.redis_client = redis.from_url(redis_url, decode_responses=True)
@@ -36,6 +38,13 @@ class SecurityService:
             raise
 
         self.http_client = httpx.Client(timeout=30.0)
+    
+    def _get_rpc_url(self, chain_id: int) -> str:
+        """Get RPC URL for the specified chain ID."""
+        network = self.network_config.get(chain_id)
+        if not network:
+            raise ValueError(f"Unsupported chain ID: {chain_id}")
+        return network["rpc_url"]
 
     def _get_access_token(self) -> str:
         """Fetch GoPlus access token from REST API, caching in Redis."""
@@ -58,7 +67,7 @@ class SecurityService:
             for payload in auth_payloads:
                 try:
                     response = self.http_client.post(
-                        f"{self.GOPLUS_API_BASE}/token",
+                        f"{self.goplus_api_base}/token",
                         json=payload
                     )
                     response.raise_for_status()
@@ -134,7 +143,7 @@ class SecurityService:
                 headers["Authorization"] = f"Bearer {access_token}"
             
             response = self.http_client.get(
-                f"{self.GOPLUS_API_BASE}/token_security/{chain_id}",
+                f"{self.goplus_api_base}/token_security/{chain_id}",
                 params={"contract_addresses": contract_address},
                 headers=headers
             )
@@ -174,7 +183,7 @@ class SecurityService:
                     headers["Authorization"] = f"Bearer {access_token}"
                 
                 response = self.http_client.get(
-                    f"{self.GOPLUS_API_BASE}/address_security/{deployer_address}",
+                    f"{self.goplus_api_base}/address_security/{deployer_address}",
                     params={"chain_id": chain_id},
                     headers=headers
                 )
@@ -208,10 +217,15 @@ def _create_security_service():
     """Create SecurityService singleton instance."""
     api_key = getattr(settings, "GOPLUS_API_KEY", "") or ""
     api_secret = getattr(settings, "GOPLUS_API_SECRET", "") or ""
-    rpc_url = getattr(settings, "BLOCKDAG_RPC_URL", "")
+    network_config = getattr(settings, "NETWORK_CONFIG", {})
     redis_url = getattr(settings, "CELERY_BROKER_URL", "redis://localhost:6379/0")
     
-    return SecurityService(api_key=api_key, api_secret=api_secret, rpc_url=rpc_url, redis_url=redis_url)
+    return SecurityService(
+        api_key=api_key, 
+        api_secret=api_secret, 
+        network_config=network_config, 
+        redis_url=redis_url
+    )
 
 
 security_service = _create_security_service()

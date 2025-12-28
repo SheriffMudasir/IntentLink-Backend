@@ -1,0 +1,48 @@
+[block:38063659 txIndex:-]from: 0x3a3...11d42to: MockToken.(constructor)value: 0 weidata: 0x608...00000logs: 1hash: 0x14e...49133
+status	0x1 Transaction mined and execution succeed
+transaction hash	0xddec89c1e6f985ee58e5afbbcc181fb4f627a1df20820ec2ec7f8a1bfee54538
+block hash	0x14ec59f0d5d34229190b48045de9155ecb282c9f807718e13dbc3532f8b49133
+block number	38063659
+contract address	0x3a06d4bb208bddb40044630f2b269449e9119c4d
+from	0x3a392a920c06125c94c0c0c2db0aba70c6e11d42
+to	MockToken.(constructor)
+gas	3000000 gas
+transaction cost	1020265 gas 
+input	0x608...00000
+decoded input	{
+	"string name": "MockUSDT",
+	"string symbol": "mUSDT"
+}
+decoded output	 - 
+logs	[
+	{
+		"from": "0x3a06d4bb208bddb40044630f2b269449e9119c4d",
+		"topic": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+		"event": "Transfer",
+		"args": {
+			"0": "0x0000000000000000000000000000000000000000",
+			"1": "0x3A392A920C06125C94C0C0C2Db0aBa70C6e11D42",
+			"2": "1000000000000000000000000",
+			"from": "0x0000000000000000000000000000000000000000",
+			"to": "0x3A392A920C06125C94C0C0C2Db0aBa70C6e11D42",
+			"value": "1000000000000000000000000"
+		}
+	}
+]
+raw logs	[
+  {
+    "address": "0x3a06d4bb208bddb40044630f2b269449e9119c4d",
+    "topics": [
+      "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+      "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "0x0000000000000000000000003a392a920c06125c94c0c0c2db0aba70c6e11d42"
+    ],
+    "data": "0x00000000000000000000000000000000000000000000d3c21bcecceda1000000",
+    "blockNumber": "0x244ce2b",
+    "transactionHash": "0xddec89c1e6f985ee58e5afbbcc181fb4f627a1df20820ec2ec7f8a1bfee54538",
+    "transactionIndex": "0x0",
+    "blockHash": "0x14ec59f0d5d34229190b48045de9155ecb282c9f807718e13dbc3532f8b49133",
+    "logIndex": "0x0",
+    "removed": false
+  }
+]

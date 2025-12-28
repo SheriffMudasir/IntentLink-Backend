@@ -1,0 +1,13 @@
+MockUSDT (MockERC20) - Polygon Amoy Testnet
+===========================================
+Contract Address: 0x0e454e74e925cd61e76d13c99b0d09b11250e091
+Chain ID: 80002
+Network: Polygon Amoy Testnet
+
+Token Details:
+- Name: MockUSDT
+- Symbol: mUSDT
+- Decimals: 18
+- Initial Supply: 1,000,000 mUSDT
+
+Deployed: December 2025

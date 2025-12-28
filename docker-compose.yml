@@ -13,6 +13,9 @@ services:
     depends_on:
       - db
       - cache
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
 
   db:
     image: postgres:15
@@ -40,6 +43,9 @@ services:
     depends_on:
       - cache
       - db
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
 
 volumes:
   postgres_data:

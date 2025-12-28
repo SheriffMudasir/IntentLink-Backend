@@ -1,0 +1,27 @@
+# Remix IDE artifacts
+artifacts/
+cache/
+
+# OpenZeppelin dependencies (auto-downloaded by Remix)
+.deps/
+
+# Node modules (if using npm for utils)
+node_modules/
+package-lock.json
+
+# Environment files
+.env
+.env.local
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.swp
+*.swo
+*~

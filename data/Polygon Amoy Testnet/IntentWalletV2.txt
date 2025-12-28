@@ -1,0 +1,13 @@
+IntentWalletV2 - Polygon Amoy Testnet
+=====================================
+Contract Address: 0x0881a837699208342675591b48910e3f5cfd951d
+Chain ID: 80002
+Network: Polygon Amoy Testnet
+
+Features:
+- getPortfolio() aggregator for unified dashboard
+- EIP-712 signature verification
+- Multi-protocol support (Staking, Lending, DEX)
+- Real yield calculation
+
+Deployed: December 2025

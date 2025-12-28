@@ -1,0 +1,109 @@
+# render.yaml - Render Blueprint for IntentLink Backend
+# Documentation: https://render.com/docs/blueprint-spec
+
+services:
+  # Main Web Service
+  - type: web
+    name: intentlink-backend
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn intentlink_project.wsgi:application --bind 0.0.0.0:$PORT --workers 3"
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false  # Set manually in Render dashboard
+      - key: DATABASE_URL
+        fromDatabase:
+          name: intentlink-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: intentlink-cache
+          property: connectionString
+      - key: BLOCKDAG_RPC_URL
+        sync: false
+      - key: POLYGON_AMOY_RPC_URL
+        sync: false
+      - key: RELAYER_PRIVATE_KEY
+        sync: false
+      - key: RELAYER_ADDRESS
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: "gemini-2.5-flash"
+      - key: GOPLUS_API_KEY
+        sync: false
+      - key: GOPLUS_API_SECRET
+        sync: false
+      - key: GOPLUS_API_BASE
+        value: "https://api.gopluslabs.io/api/v1"
+      # BlockDAG Contract Addresses
+      - key: BLOCKDAG_INTENT_WALLET
+        sync: false
+      - key: BLOCKDAG_MOCK_DEX
+        sync: false
+      - key: BLOCKDAG_MOCK_STAKING
+        sync: false
+      - key: BLOCKDAG_MOCK_LENDING
+        sync: false
+      - key: BLOCKDAG_MOCK_USDT
+        sync: false
+      # Polygon Contract Addresses
+      - key: POLYGON_INTENT_WALLET
+        sync: false
+      - key: POLYGON_MOCK_DEX
+        sync: false
+      - key: POLYGON_MOCK_STAKING
+        sync: false
+      - key: POLYGON_MOCK_LENDING
+        sync: false
+      - key: POLYGON_MOCK_USDT
+        sync: false
+
+  # Celery Worker (Background Tasks)
+  - type: worker
+    name: intentlink-worker
+    runtime: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "celery -A intentlink_project worker -l INFO"
+    envVars:
+      - key: SECRET_KEY
+        fromService:
+          type: web
+          name: intentlink-backend
+          envVarKey: SECRET_KEY
+      - key: DATABASE_URL
+        fromDatabase:
+          name: intentlink-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: intentlink-cache
+          property: connectionString
+      # Copy blockchain configs from web service
+      - key: BLOCKDAG_RPC_URL
+        sync: false
+      - key: POLYGON_AMOY_RPC_URL
+        sync: false
+      - key: RELAYER_PRIVATE_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+
+databases:
+  - name: intentlink-db
+    databaseName: intentlink
+    user: intentlink
+    plan: free  # Change to 'starter' or higher for production
+
+# Redis for Celery
+# Note: Render doesn't have native Redis in blueprints
+# You'll need to use Render Redis or external service like Upstash

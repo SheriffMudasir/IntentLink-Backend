@@ -62,6 +62,10 @@ class Execution(models.Model):
     relayer_address = models.CharField(max_length=42, blank=True, null=True)
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.PENDING)
     receipt = models.JSONField(blank=True, null=True)
+    # Signature data for on-chain verification
+    signature = models.TextField(blank=True, null=True)
+    nonce = models.CharField(max_length=50, default="0")  # Store as string for big integers
+    expiry = models.CharField(max_length=50, default="0")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -6,19 +6,35 @@ import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/utils/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+
+// Interface to interact with our specific MockStakingFarmV2
+interface IStakingFarm {
+    function getPosition(
+        address user
+    ) external view returns (uint256 staked, uint256 rewards, uint256 apy);
+}
 
 /**
- * @title IntentWallet
+ * @title IntentWalletV2
  * @author IntentLink Team
- * @notice An Account-Abstraction wallet for executing signed, batched transactions (plans).
+ * @notice V2 adds Portfolio Aggregation for the Frontend Dashboard.
  */
-contract IntentWallet is Ownable, Pausable, ReentrancyGuard, EIP712 {
+contract IntentWalletV2 is Ownable, Pausable, ReentrancyGuard, EIP712 {
     // --- Data Structures ---
     struct Plan {
         bytes32 planId;
-        bytes32 planHash; // keccak256 of the canonicalized plan JSON
+        bytes32 planHash;
         uint256 nonce;
         uint256 expiry;
+    }
+
+    struct PortfolioView {
+        uint256 walletBalance; // User's liquid MockUSDT
+        uint256 stakedBalance; // User's staked amount
+        uint256 pendingRewards; // Rewards waiting to be claimed
+        uint256 currentAPY; // Live APY from the farm
+        uint256 ethBalance; // User's Native Token (BDAG/POL) balance
     }
 
     // --- State Variables ---
@@ -26,7 +42,6 @@ contract IntentWallet is Ownable, Pausable, ReentrancyGuard, EIP712 {
     mapping(address => bool) public isTargetWhitelisted;
     mapping(address => bool) public isRelayerAuthorized;
 
-    // --- Constants for EIP-712 ---
     bytes32 private constant _PLAN_TYPEHASH =
         keccak256(
             "Plan(bytes32 planId,bytes32 planHash,uint256 nonce,uint256 expiry)"
@@ -43,15 +58,11 @@ contract IntentWallet is Ownable, Pausable, ReentrancyGuard, EIP712 {
     event TargetWhitelistUpdated(address indexed target, bool isAllowed);
     event RelayerAuthorizationUpdated(address indexed relayer, bool isAllowed);
 
-    // --- Constructor ---
-    /**
-     * @param initialOwner The address to be set as the initial owner of the contract.
-     */
     constructor(
         address initialOwner
     ) Ownable(initialOwner) EIP712("IntentLink", "1") {}
 
-    // --- Core Logic ---
+    // --- Core Execution Logic (Same as V1 for backward compatibility) ---
     function executeBatch(
         address user,
         Plan calldata plan,
@@ -84,7 +95,36 @@ contract IntentWallet is Ownable, Pausable, ReentrancyGuard, EIP712 {
         emit IntentExecuted(user, plan.planId, cidHash, msg.sender, plan.nonce);
     }
 
-    // --- Internal Functions ---
+    // --- Portfolio View Function (The UX Fix) ---
+    /**
+     * @notice Fetches all dashboard data in a single RPC call.
+     * @param user The user wallet address
+     * @param token The MockUSDT address
+     * @param farm The MockStakingFarmV2 address
+     */
+    function getPortfolio(
+        address user,
+        address token,
+        address farm
+    ) external view returns (PortfolioView memory) {
+        // 1. Get Wallet Token Balance
+        uint256 bal = IERC20(token).balanceOf(user);
+
+        // 2. Get Staking Data (Staked, Rewards, APY) from the V2 Farm
+        (uint256 staked, uint256 rewards, uint256 apy) = IStakingFarm(farm)
+            .getPosition(user);
+
+        return
+            PortfolioView({
+                walletBalance: bal,
+                stakedBalance: staked,
+                pendingRewards: rewards,
+                currentAPY: apy,
+                ethBalance: user.balance
+            });
+    }
+
+    // --- Internal & Admin (Same as V1) ---
     function _verifyPlanSignature(
         address user,
         Plan calldata plan,
@@ -101,14 +141,11 @@ contract IntentWallet is Ownable, Pausable, ReentrancyGuard, EIP712 {
                 )
             )
         );
-
         address signer = ECDSA.recover(digest, signature);
-        require(signer != address(0), "Invalid signature");
-        require(signer == user, "Signer does not match user");
+        require(signer == user, "Invalid signature");
         require(nonces[signer] == plan.nonce, "Invalid nonce");
     }
 
-    // --- Admin Functions ---
     function setWhitelistStatus(
         address target,
         bool isAllowed

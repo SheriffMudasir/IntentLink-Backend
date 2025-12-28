@@ -1,0 +1,45 @@
+[block:38078512 txIndex:-]from: 0x3a3...11d42to: IntentWalletV2.(constructor)value: 0 weidata: 0x610...11d42logs: 1hash: 0xcf6...a66d8
+status	0x1 Transaction mined and execution succeed
+transaction hash	0x976df6eed18e0097bfa0631b7a0ea4e81f7db08b7b77e1456601f4275ac437dc
+block hash	0xcf6c3ae034c996c5ead9a208caf5854f009ab2344140e5f00a1470bce19a66d8
+block number	38078512
+contract address	0xe3dad1813a5c75fba505780a386a81fd3b8777e4
+from	0x3a392a920c06125c94c0c0c2db0aba70c6e11d42
+to	IntentWalletV2.(constructor)
+gas	3000000 gas
+transaction cost	2158397 gas 
+input	0x610...11d42
+decoded input	{
+	"address initialOwner": "0x3A392A920C06125C94C0C0C2Db0aBa70C6e11D42"
+}
+decoded output	 - 
+logs	[
+	{
+		"from": "0xe3dad1813a5c75fba505780a386a81fd3b8777e4",
+		"topic": "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",
+		"event": "OwnershipTransferred",
+		"args": {
+			"0": "0x0000000000000000000000000000000000000000",
+			"1": "0x3A392A920C06125C94C0C0C2Db0aBa70C6e11D42",
+			"previousOwner": "0x0000000000000000000000000000000000000000",
+			"newOwner": "0x3A392A920C06125C94C0C0C2Db0aBa70C6e11D42"
+		}
+	}
+]
+raw logs	[
+  {
+    "address": "0xe3dad1813a5c75fba505780a386a81fd3b8777e4",
+    "topics": [
+      "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",
+      "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "0x0000000000000000000000003a392a920c06125c94c0c0c2db0aba70c6e11d42"
+    ],
+    "data": "0x",
+    "blockNumber": "0x2450830",
+    "transactionHash": "0x976df6eed18e0097bfa0631b7a0ea4e81f7db08b7b77e1456601f4275ac437dc",
+    "transactionIndex": "0x0",
+    "blockHash": "0xcf6c3ae034c996c5ead9a208caf5854f009ab2344140e5f00a1470bce19a66d8",
+    "logIndex": "0x0",
+    "removed": false
+  }
+]

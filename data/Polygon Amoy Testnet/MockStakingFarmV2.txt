@@ -1,0 +1,13 @@
+MockStakingFarmV2 - Polygon Amoy Testnet
+========================================
+Contract Address: 0x90cf57776668a181f2ac483879173e2a8b09cf1b
+Chain ID: 80002
+Network: Polygon Amoy Testnet
+
+Features:
+- Real APR calculation via getAPR()
+- Pending rewards via pendingRewards(user)
+- Staked balance via stakes(user)
+- Native token staking (POL)
+
+Deployed: December 2025

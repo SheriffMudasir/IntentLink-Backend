@@ -1,0 +1,15 @@
+[block:38064239 txIndex:-]from: 0x3a3...11d42to: MockStakingFarmV2.(constructor)value: 0 weidata: 0x608...a0033logs: 0hash: 0x2de...f179b
+status	0x1 Transaction mined and execution succeed
+transaction hash	0xa3f4762f3e3c4c468098b0bfe5f784afbd97f362a81eaaa5c9426b24f3076753
+block hash	0x2dedf4ad6c231e05f91ed58926b3edcd5daa82ae2c276ce945d7672a3e4f179b
+block number	38064239
+contract address	0xb39a039ba3abd16d97334f6c3c5bda9b8e59dae6
+from	0x3a392a920c06125c94c0c0c2db0aba70c6e11d42
+to	MockStakingFarmV2.(constructor)
+gas	3000000 gas
+transaction cost	703346 gas 
+input	0x608...a0033
+decoded input	{}
+decoded output	 - 
+logs	[]
+raw logs	[]

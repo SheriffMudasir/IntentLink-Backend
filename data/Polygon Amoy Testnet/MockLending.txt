@@ -1,0 +1,142 @@
+[block:29554382 txIndex:1]from: 0x3a3...11d42to: MockLending.(constructor)value: 0 weidata: 0x608...a0033logs: 0hash: 0xef6...6179a
+status	0x1 Transaction mined and execution succeed
+transaction hash	0x6dc1df6706ae26db9106bc333a0385892cd4c5fc8bd1b9bb6edc6d6e8bed65ee
+block hash	0xef64d9c9e1eead3493288be7063658a64707990296adcebd7a4cf54569c6179a
+block number	29554382
+contract address	0x1b227df9c8d34cab880774737fbf426e66ba98ed
+from	0x3a392a920c06125c94c0c0c2db0aba70c6e11d42
+to	MockLending.(constructor)
+gas	1000000 gas
+transaction cost	217662 gas 
+input	0x608...a0033
+decoded input	{}
+decoded output	 - 
+logs	[]
+raw logs	[
+  {
+    "address": "0x0000000000000000000000000000000000001010",
+    "topics": [
+      "0x4dfe1bbbcf077ddc3e01291eea2d5c70c2b422b415d95645b9adcfd678cb1d63",
+      "0x0000000000000000000000000000000000000000000000000000000000001010",
+      "0x0000000000000000000000003a392a920c06125c94c0c0c2db0aba70c6e11d42",
+      "0x0000000000000000000000007ee41d8a25641000661b1ef5e6ae8a00400466b0"
+    ],
+    "data": "0x00000000000000000000000000000000000000000000000000202dcf9267ea7c0000000000000000000000000000000000000000000000000094081e0a1d7180000000000000000000000000000000000000000000000ecc73befdd97cccad7a0000000000000000000000000000000000000000000000000073da4e77b58704000000000000000000000000000000000000000000000ecc73df2ba90f3497f6",
+    "blockNumber": "0x1c2f6ce",
+    "transactionHash": "0x6dc1df6706ae26db9106bc333a0385892cd4c5fc8bd1b9bb6edc6d6e8bed65ee",
+    "transactionIndex": "0x1",
+    "blockHash": "0xef64d9c9e1eead3493288be7063658a64707990296adcebd7a4cf54569c6179a",
+    "logIndex": "0x2",
+    "removed": false
+  }
+]
+
+
+CONTRACT ADDRESS = 0x1b227df9c8d34cab880774737fbf426e66ba98ed
+
+
+
+ABI = [
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "deposit",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "Deposited",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "deposits",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
+
+
+setWhiteList:
+[block:29554681 txIndex:-]from: 0x3a3...11d42to: IntentWallet.setWhitelistStatus(address,bool) 0x718...2a1c7value: 0 weidata: 0x0c4...00001logs: 0hash: 0x6ea...04e76
+status	0x1 Transaction mined and execution succeed
+transaction hash	0x42db54e7f0f4d70fe7e485f6cf6ad7c08a7faff46f44a1bec550d99b4bd5f2fe
+block hash	0x6eaa48d68e5ed8e6ded499ae4d643443bbdb24aad9c4a53a8a0369b0f4404e76
+block number	29554681
+from	0x3a392a920c06125c94c0c0c2db0aba70c6e11d42
+to	IntentWallet.setWhitelistStatus(address,bool) 0x718a09981d305c2293d0c85e9d957ad25cb2a1c7
+gas	1000000 gas
+transaction cost	48309 gas 
+input	0x0c4...00001
+decoded input	{
+	"address target": "0x1b227DF9c8D34CaB880774737FBf426E66Ba98Ed",
+	"bool isAllowed": true
+}
+decoded output	 - 
+logs	[]
+raw logs	[
+  {
+    "address": "0x718a09981d305c2293d0c85e9d957ad25cb2a1c7",
+    "topics": [
+      "0x52eec1a0372bcc0f149dd096fc04f013047c878bd949d11adecf9b39bc0c71dc",
+      "0x0000000000000000000000001b227df9c8d34cab880774737fbf426e66ba98ed"
+    ],
+    "data": "0x0000000000000000000000000000000000000000000000000000000000000001",
+    "blockNumber": "0x1c2f7f9",
+    "transactionHash": "0x42db54e7f0f4d70fe7e485f6cf6ad7c08a7faff46f44a1bec550d99b4bd5f2fe",
+    "transactionIndex": "0x0",
+    "blockHash": "0x6eaa48d68e5ed8e6ded499ae4d643443bbdb24aad9c4a53a8a0369b0f4404e76",
+    "logIndex": "0x0",
+    "removed": false
+  },
+  {
+    "address": "0x0000000000000000000000000000000000001010",
+    "topics": [
+      "0x4dfe1bbbcf077ddc3e01291eea2d5c70c2b422b415d95645b9adcfd678cb1d63",
+      "0x0000000000000000000000000000000000000000000000000000000000001010",
+      "0x0000000000000000000000003a392a920c06125c94c0c0c2db0aba70c6e11d42",
+      "0x0000000000000000000000007ee41d8a25641000661b1ef5e6ae8a00400466b0"
+    ],
+    "data": "0x00000000000000000000000000000000000000000000000000056249b988d9c9000000000000000000000000000000000000000000000000006f7b90f5bc7617000000000000000000000000000000000000000000000ecc9704a7c0670357ef000000000000000000000000000000000000000000000000006a19473c339c4e000000000000000000000000000000000000000000000ecc970a0a0a208c31b8",
+    "blockNumber": "0x1c2f7f9",
+    "transactionHash": "0x42db54e7f0f4d70fe7e485f6cf6ad7c08a7faff46f44a1bec550d99b4bd5f2fe",
+    "transactionIndex": "0x0",
+    "blockHash": "0x6eaa48d68e5ed8e6ded499ae4d643443bbdb24aad9c4a53a8a0369b0f4404e76",
+    "logIndex": "0x1",
+    "removed": false
+  }
+]

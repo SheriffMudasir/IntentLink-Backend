@@ -1,0 +1,5 @@
+BlockDAG Awakening (Chain 1043)
+Contract	Address	Status
+IntentWalletV2	0xe3dad1813a5c75fba505780a386a81fd3b8777e4	✅ Live
+StakingFarmV3	0x0aD823F27D89dDEf66833849df2e1CD36d06a652	✅ Whitelisted
+MockUSDT	0x3a06d4bb208bddb40044630f2b269449e9119c4d	✅ Live
