@@ -21,3 +21,13 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy project code
 COPY . .
+
+# Create staticfiles directory and collect static files
+RUN mkdir -p staticfiles
+RUN SECRET_KEY=build-temp-key python manage.py collectstatic --noinput --clear
+
+# Expose port
+EXPOSE 8000
+
+# Run migrations and start server
+CMD python manage.py migrate && gunicorn --bind 0.0.0.0:8000 --timeout 120 --workers 2 intentlink_project.wsgi:application
