@@ -160,10 +160,17 @@ Original request: {user_input}
             result["target"] = parsed_data["target"]
         else:
             # Default targets based on intent type
-            if result["intent_type"] in ["stake", "lend"]:
+            if result["intent_type"] in ["stake", "stake_and_compound", "lend"]:
                 result["target"] = "highest_risk_adjusted_apr"
             elif result["intent_type"] == "swap":
                 result["target"] = "best_rate"
+            elif result["intent_type"] in ["claim_rewards", "compound"]:
+                # Wave 4: Normalize claim_rewards to compound
+                result["intent_type"] = "compound"
+                result["target"] = "auto_compound"
+            else:
+                # Fallback default
+                result["target"] = "default"
                 
         if parsed_data.get("recipient"):
             result["recipient"] = parsed_data["recipient"]
@@ -275,13 +282,14 @@ Original request: {user_input}
                 "amount_unit": "token",
             }
         
-        # Pattern: claim rewards
-        if 'claim' in text or 'harvest' in text or 'collect' in text:
+        # Pattern: claim/compound/harvest rewards
+        if 'claim' in text or 'harvest' in text or 'collect' in text or 'compound' in text:
             return {
-                "intent_type": "claim_rewards",
+                "intent_type": "compound",  # Wave 4: Normalize to compound
                 "asset": "BDAG",
-                "amount": -1,  # All available rewards
+                "amount": 0,  # No amount needed for compound
                 "amount_unit": "token",
+                "target": "auto_compound",
             }
         
         # Could not parse

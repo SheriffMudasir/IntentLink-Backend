@@ -12,14 +12,32 @@ logger = logging.getLogger(__name__)
 
 
 
-def generate_stake_for_calldata(user_address: str, amount_wei: int) -> bytes:
+def generate_stake_for_calldata(user_address: str, amount_wei: int, lock_type: int = 2) -> bytes:
     """
-    Generates calldata for V3 staking: stakeFor(address onBehalfOf, uint256 amount)
-    Selector: 0x2ee40908
+    Generates calldata for Wave 4 IntentYieldVault staking: stakeFor(address onBehalfOf, uint256 amount, uint8 lockType)
+    Selector: keccak256("stakeFor(address,uint256,uint8)")[0:4]
+    
+    Lock Types:
+    - 0: Flexible (1x Yield)
+    - 1: 7 Days (1.5x Yield)
+    - 2: 30 Days (3x Yield) -> DEFAULT for max APY demo
     """
-    function_selector = bytes.fromhex("2ee40908")
+    # Calculate selector for stakeFor(address,uint256,uint8)
+    function_selector = Web3.keccak(text='stakeFor(address,uint256,uint8)')[0:4]
     checksum_address = Web3.to_checksum_address(user_address)
-    encoded_params = encode(['address', 'uint256'], [checksum_address, int(amount_wei)])
+    encoded_params = encode(['address', 'uint256', 'uint8'], [checksum_address, int(amount_wei), int(lock_type)])
+    return function_selector + encoded_params
+
+def generate_compound_calldata(user_address: str) -> bytes:
+    """
+    Generates calldata for Wave 4 compounding: compoundFor(address onBehalfOf)
+    Selector: keccak256("compoundFor(address)")[0:4]
+    
+    This claims pending rewards and adds them to the staked principal.
+    """
+    function_selector = Web3.keccak(text='compoundFor(address)')[0:4]
+    checksum_address = Web3.to_checksum_address(user_address)
+    encoded_params = encode(['address'], [checksum_address])
     return function_selector + encoded_params
 
 def generate_transfer_from_calldata(from_address: str, to_address: str, amount_wei: int) -> bytes:
@@ -49,10 +67,11 @@ def execute_plan_task(execution_id):
     """
     Executes the plan on-chain using the RelayerService with real signature data.
     
-    V3 Update: Now uses stakeFor(user, amount) instead of stake(amount)
-    to properly attribute stakes to the user, not the relayer wallet.
+    Wave 4 Update: Supports IntentYieldVault with lockType and compoundFor
+    - stakeFor(user, amount, lockType) for locking multipliers
+    - compoundFor(user) for reward auto-compounding
     
-    Fix: Iterates through plan steps (TransferFrom + Approve + Stake) to ensure
+    Fix: Iterates through plan steps (TransferFrom + Approve + Stake/Compound) to ensure
     IntentWallet has funds before approving/staking.
     """
     logger.info(f"[Task] Starting execution for ID: {execution_id}")
@@ -149,12 +168,29 @@ def execute_plan_task(execution_id):
                 # Stake step: Target is the CONTRACT
                 contract_address = step.get('contract')
                 
+                # Wave 4: Support lockType parameter (defaults to 2 for 30-day max APY)
+                lock_type = step.get('lockType', 2)
+                
                 logger.info(f"[Task] Generating {step_type.upper()} for {contract_address}")
                 logger.info(f"[Task]    User: {intent.user_wallet}")
                 logger.info(f"[Task]    Amount: {amount_wei}")
+                logger.info(f"[Task]    Lock Type: {lock_type} (Wave 4 IntentYieldVault)")
                 
-                # Use stakeFor for V3
-                calldata = generate_stake_for_calldata(intent.user_wallet, amount_wei)
+                # Use stakeFor with lockType for Wave 4
+                calldata = generate_stake_for_calldata(intent.user_wallet, amount_wei, lock_type)
+                
+                targets.append(contract_address)
+                values.append(0)
+                datas.append(calldata)
+            
+            elif step_type in ['compound', 'auto_compound']:
+                # Wave 4: Compound step - claims and restakes rewards
+                contract_address = step.get('contract')
+                
+                logger.info(f"[Task] Generating COMPOUND for {contract_address}")
+                logger.info(f"[Task]    User: {intent.user_wallet}")
+                
+                calldata = generate_compound_calldata(intent.user_wallet)
                 
                 targets.append(contract_address)
                 values.append(0)

@@ -39,6 +39,7 @@ class StakingPosition:
     pending_rewards: Decimal
     apy: Decimal
     staked_at: int  # timestamp
+    unlock_time: int = 0  # Wave 4: unlockTime from IntentYieldVault
     
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -48,6 +49,7 @@ class StakingPosition:
             "pending_rewards": str(self.pending_rewards),
             "apy": str(self.apy),
             "staked_at": self.staked_at,
+            "unlock_time": self.unlock_time,
         }
 
 
@@ -163,6 +165,7 @@ class PortfolioService:
         abi_dir = settings.BASE_DIR / 'ABI'
         
         abi_files = {
+            'IntentYieldVault': 'IntentYieldVault.json',  # Wave 4: Hero Primitive
             'MockStakingFarm': 'MockStakingFarm.json',
             'MockStakingFarmV2': 'MockStakingFarmV2.json',  # V2 with real rewards
             'MockStakingFarmV3': 'MockStakingFarmV3.json',  # V3 with stakeFor() Account Abstraction
@@ -378,7 +381,34 @@ class PortfolioService:
             
             checksum_user = w3.to_checksum_address(user_address)
             
-            # Try V2 getPosition first (returns staked, rewards, apy)
+            # Wave 4: Try IntentYieldVault first (getPosition returns 4 values)
+            try:
+                contract = self._get_contract(chain_id, 'IntentYieldVault', protocol_address)
+                if contract:
+                    position = contract.functions.getPosition(checksum_user).call()
+                    # Wave 4 signature: (staked, rewards, apy, unlockTime)
+                    staked_amount = Decimal(position[0]) / Decimal(10**18)
+                    pending_rewards = Decimal(position[1]) / Decimal(10**18)
+                    # APY comes as basis points (1200 = 12%)
+                    apy = Decimal(position[2]) / Decimal(100)
+                    unlock_time = int(position[3])
+                    staked_at = 0
+                    
+                    logger.info(f"Wave 4 getPosition: staked={staked_amount}, rewards={pending_rewards}, apy={apy}, unlockTime={unlock_time}")
+                    
+                    return StakingPosition(
+                        protocol_address=protocol_address,
+                        protocol_name="IntentYieldVault",
+                        staked_amount=staked_amount,
+                        pending_rewards=pending_rewards,
+                        apy=apy if isinstance(apy, Decimal) else self.STAKING_APY,
+                        staked_at=staked_at,
+                        unlock_time=unlock_time,
+                    )
+            except Exception as e_wave4:
+                logger.debug(f"IntentYieldVault getPosition failed: {e_wave4}, trying legacy contracts...")
+            
+            # Fallback: Try V3 ABI (has stakeFor Account Abstraction support)
             try:
                 position = contract.functions.getPosition(checksum_user).call()
                 staked_amount = Decimal(position[0]) / Decimal(10**18)

@@ -127,6 +127,16 @@ def parse_intent_text(input_text: str, chain_id: int) -> dict:
             "target": "lowest_borrow_apy",
         }
     
+    # Pattern: compound/harvest
+    if 'compound' in text or 'harvest' in text or 'claim' in text:
+        return {
+            "intent_type": "compound",
+            "asset": native_currency.upper(),
+            "amount": 0,  # No amount needed for compound
+            "amount_unit": "token",
+            "target": "auto_compound",
+        }
+    
     # Could not parse
     return None
 
@@ -265,9 +275,68 @@ def plan_intent(request, payload: PlanInput):
         for addr in network_config["whitelisted_protocols"]["lending"]
     ]
 
+    
     intent_type = (intent.intent_json or {}).get("intent_type", "").lower()
     logger.info(f"[PLAN] Intent Type: {intent_type}")
     
+    # Wave 4: Handle compound intent (no approval needed, just compound)
+    if "compound" in intent_type:
+        logger.info(f"[PLAN] Compound intent detected")
+        
+        # Get staking vault address
+        staking_protocols = network_config["whitelisted_protocols"].get("staking", [])
+        if not staking_protocols:
+            logger.error(f"[PLAN] No staking protocols configured for compounding")
+            raise HttpError(500, "No staking protocols available for compounding")
+        
+        vault_address = staking_protocols[0]
+        logger.info(f"[PLAN] Compound target: {vault_address}")
+        
+        # Create plan with compound step only
+        plan_data = {
+            "steps": [
+                {
+                    "type": "compound",
+                    "contract": vault_address,
+                }
+            ],
+            "chosen_protocol": "staking",
+            "intent_wallet": INTENT_WALLET_ADDRESS,
+            "chain_id": intent.chain_id
+        }
+        
+        # Create candidate (vault itself)
+        compound_candidate = CandidateSchema(
+            address=vault_address,
+            apy=0.36,  # Current APY with multiplier
+            tvl=500_000,
+            safety_score=100,
+            utility=1.0,
+            warnings=[],
+            protocol="staking",
+        )
+        
+        new_plan = Plan.objects.create(
+            intent=intent,
+            plan_json=plan_data,
+            utility_scores=[compound_candidate.model_dump()],
+            chosen_contract_address=vault_address,
+            status=Plan.Status.READY
+        )
+        
+        intent.status = Intent.Status.PLANNED
+        intent.save()
+        
+        logger.info(f"[PLAN] Compound plan created with ID: {new_plan.id}")
+        logger.info("="*70)
+        
+        return PlanOutput(
+            plan_id=new_plan.id,
+            candidates=[compound_candidate],
+            chosen=compound_candidate
+        )
+    
+    # Regular stake/lend intent handling
     if "lend" in intent_type or "borrow" in intent_type:
         candidates_to_check = CANDIDATE_LENDING
         logger.info(f"[PLAN] Selected LENDING candidates")
@@ -356,8 +425,9 @@ def plan_intent(request, payload: PlanInput):
             "contract": chosen_candidate.address,
             "amount": amount,
             "asset": asset,
+            "lockType": 2,  # Wave 4: 30-day lock for 3x multiplier (max APY demo)
         }
-        logger.info(f"[PLAN] Action: STAKE")
+        logger.info(f"[PLAN] Action: STAKE (Lock Type 2 - 30 days)")
 
     plan_data = {
         "steps": [

@@ -56,10 +56,11 @@ NETWORK_CONFIG = {
             # Legacy V1 (kept for reference)
             "IntentWalletV1": os.getenv('BLOCKDAG_INTENT_WALLET_V1', '0x718a09981d305c2293d0c85e9d957ad25cb2a1c7'),
             "MockDEX": os.getenv('BLOCKDAG_MOCK_DEX', '0xbC47d9625e7c102C6E9C08D29BbD3A76514eCB56'),
-            # V4 Contracts with improved StakeFor logic
+            # Wave 4: IntentYieldVault (Hero Primitive with locking + compounding)
+            "IntentYieldVault": os.getenv('BLOCKDAG_INTENT_YIELD_VAULT', '0xfd40a1fc236610ed46c0e33ad39fbd50f6421b7e'),
+            # Legacy Staking Contracts
             "MockStaking": os.getenv('BLOCKDAG_MOCK_STAKING', '0xa0Cb7e7052c88A19335Ba6FD961c5B61Ac07fdb7'),
             "MockStakingV4": os.getenv('BLOCKDAG_MOCK_STAKING', '0xa0Cb7e7052c88A19335Ba6FD961c5B61Ac07fdb7'),
-            # Legacy
             "MockStakingV3": os.getenv('BLOCKDAG_MOCK_STAKING_V3', '0x0aD823F27D89dDEf66833849df2e1CD36d06a652'),
             "MockStakingV2": os.getenv('BLOCKDAG_MOCK_STAKING_V2', '0xb39a039ba3abd16d97334f6c3c5bda9b8e59dae6'),
             "MockLending": os.getenv('BLOCKDAG_MOCK_LENDING', '0xa23bDd28F9221F275897D8A26A8eb97A341cd257'),
@@ -74,8 +75,8 @@ NETWORK_CONFIG = {
         },
         "whitelisted_protocols": {
             "dex": [os.getenv('BLOCKDAG_MOCK_DEX', '0xbC47d9625e7c102C6E9C08D29BbD3A76514eCB56')],
-            # V4 Staking
-            "staking": [os.getenv('BLOCKDAG_MOCK_STAKING', '0xa0Cb7e7052c88A19335Ba6FD961c5B61Ac07fdb7')],
+            # Wave 4: IntentYieldVault replaces MockStaking
+            "staking": [os.getenv('BLOCKDAG_INTENT_YIELD_VAULT', '0xfd40a1fc236610ed46c0e33ad39fbd50f6421b7e')],
             "lending": [os.getenv('BLOCKDAG_MOCK_LENDING', '0xa23bDd28F9221F275897D8A26A8eb97A341cd257')],
         }
     },
@@ -91,10 +92,11 @@ NETWORK_CONFIG = {
             # Legacy V1 (kept for reference)
             "IntentWalletV1": os.getenv('POLYGON_INTENT_WALLET_V1', '0x718a09981d305c2293d0c85e9d957ad25cb2a1c7'),
             "MockDEX": os.getenv('POLYGON_MOCK_DEX', '0xbC47d9625e7c102C6E9C08D29BbD3A76514eCB56'),
-            # V4 Contracts with improved StakeFor logic
+            # Wave 4: IntentYieldVault (Hero Primitive with locking + compounding)
+            "IntentYieldVault": os.getenv('POLYGON_INTENT_YIELD_VAULT', '0x11adda847322b37260553ba9233234679bb09893'),
+            # Legacy Staking Contracts
             "MockStaking": os.getenv('POLYGON_MOCK_STAKING', '0xC9e70051Cf274074F301288E1baDa32724c2BA98'),
             "MockStakingV4": os.getenv('POLYGON_MOCK_STAKING', '0xC9e70051Cf274074F301288E1baDa32724c2BA98'),
-            # Legacy
             "MockStakingV3": os.getenv('POLYGON_MOCK_STAKING_V3', '0x3c26f13764F3d48f21325cf3cE48972d015bCf21'),
             "MockStakingV2": os.getenv('POLYGON_MOCK_STAKING_V2', '0x90cf57776668a181f2ac483879173e2a8b09cf1b'),
             "MockLending": os.getenv('POLYGON_MOCK_LENDING', '0x1b227df9c8d34cab880774737fbf426e66ba98ed'),
@@ -109,8 +111,8 @@ NETWORK_CONFIG = {
         },
         "whitelisted_protocols": {
             "dex": [os.getenv('POLYGON_MOCK_DEX', '0xbC47d9625e7c102C6E9C08D29BbD3A76514eCB56')],
-            # V4 Staking
-            "staking": [os.getenv('POLYGON_MOCK_STAKING', '0xC9e70051Cf274074F301288E1baDa32724c2BA98')],
+            # Wave 4: IntentYieldVault replaces MockStaking
+            "staking": [os.getenv('POLYGON_INTENT_YIELD_VAULT', '0x11adda847322b37260553ba9233234679bb09893')],
             "lending": [os.getenv('POLYGON_MOCK_LENDING', '0x1b227df9c8d34cab880774737fbf426e66ba98ed')],
         }
     }
